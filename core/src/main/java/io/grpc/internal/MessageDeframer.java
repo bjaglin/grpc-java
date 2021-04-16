@@ -49,7 +49,7 @@ public class MessageDeframer implements Closeable, Deframer {
    * A listener of deframing events. These methods will be invoked from the deframing thread.
    */
   public interface Listener {
-
+f
     /**
      * Called when the given number of bytes has been read from the input source of the deframer.
      * This is typically used to indicate to the underlying transport that more data can be
@@ -440,7 +440,7 @@ public class MessageDeframer implements Closeable, Deframer {
   }
 
   /**
-   * An {@link InputStream} that enforces the {@link #maxMessageSize} limit for compressed frames.
+   * An {@link InputStream} that enforces the {@link #maxMessageSize} limit.
    */
   @VisibleForTesting
   static final class SizeEnforcingInputStream extends FilterInputStream {
@@ -517,7 +517,7 @@ public class MessageDeframer implements Closeable, Deframer {
     private void verifySize() {
       if (count > maxMessageSize) {
         throw Status.RESOURCE_EXHAUSTED.withDescription(String.format(
-                "Compressed gRPC message exceeds maximum size %d: %d bytes read",
+                "gRPC message exceeds maximum size %d: %d bytes read",
                 maxMessageSize, count)).asRuntimeException();
       }
     }
